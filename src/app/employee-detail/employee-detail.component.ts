@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employee-detail',
@@ -8,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
     </h2>
 
     
-  <ul *ngFor="let employee of employees">
-  <li>{{employee.id}} {{employee.name} - {{employee.age}}</li>
+    <ul *ngFor="let employee of employees">
+    <li>{{employee.id}}. {{employee.name}} - {{employee.age}}</li>
   </ul>
   `,
   styles: [
@@ -17,10 +18,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeDetailComponent implements OnInit {
 
-  employees=[];
-  constructor() { }
+  public employees=[];
+  constructor(private _employeeService: EmployeeService) { }
 
   ngOnInit(): void {
+    this.employees= this._employeeService.getEmployees();
   }
 
 }
